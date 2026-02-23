@@ -6,9 +6,12 @@ Gustavo Vasconcelos, 2026
 
 from __future__ import annotations
 
-from typing import Callable
+from typing import TYPE_CHECKING
 
 from optiland import backend as be
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 try:
     from scipy.interpolate import RectBivariateSpline
