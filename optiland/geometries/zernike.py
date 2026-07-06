@@ -279,9 +279,11 @@ class ZernikePolynomialGeometry(NewtonRaphsonGeometry):
 
         for (n, m), c in zip(self.zernike.indices, self.zernike.coeffs, strict=True):
             dZdrho, dZdphi = self.zernike.get_derivative(n, m, rho, phi)
+            norm_constant = self.zernike._norm_constant(n, m)
+
             # Partial derivatives w.r.t. x and y
-            dzdx = dzdx + c * (dZdrho * drho_dx + dZdphi * dphi_dx)
-            dzdy = dzdy + c * (dZdrho * drho_dy + dZdphi * dphi_dy)
+            dzdx = dzdx + norm_constant * c * (dZdrho * drho_dx + dZdphi * dphi_dx)
+            dzdy = dzdy + norm_constant * c * (dZdrho * drho_dy + dZdphi * dphi_dy)
 
         # Surface normal vector in cartesian coords: (-dzdx, -dzdy, 1)
         # normalized. Check sign conventions!
